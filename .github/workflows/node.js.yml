@@ -16,4 +16,10 @@ jobs:
       with:
         node-version: '15.x'
     - run: npm ci
-    - run: npm test
+    - run: npm test 2>&1 | tee unitlog.txt
+    - name: Update test results
+      run: |
+        git config --global user.name 'Ghost'
+        git config --global user.email 'michal.miladowski@gmail.com'
+        git commit -am 'Updated test results'
+        git push
