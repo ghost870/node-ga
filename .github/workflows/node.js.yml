@@ -21,5 +21,6 @@ jobs:
       run: |
         git config --global user.name 'Ghost'
         git config --global user.email 'michal.miladowski@gmail.com'
+        git add unitlog.txt
         git commit -am 'Updated test results'
         git push
