@@ -1,0 +1,10 @@
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: UnitLogs cleanup
+        run: sh .github/workflows-scripts/clean-unitlogs.sh
