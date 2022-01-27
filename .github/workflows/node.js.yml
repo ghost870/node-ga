@@ -7,7 +7,7 @@ on:
 jobs:
   test:
 
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -16,11 +16,11 @@ jobs:
       with:
         node-version: '15.x'
     - run: npm ci
-    - run: npm test 2>&1 | tee unitlogs/$(date +%s).log
+    - run: npm test 2>&1 | tee unitlogs/test.log
     - name: Update test results
       run: |
         git config --global user.name 'Ghost'
         git config --global user.email 'michal.miladowski@gmail.com'
-        git add .
+        git add unitlogs/test.log
         git commit -am 'Updated test results'
         git push
