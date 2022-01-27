@@ -16,11 +16,11 @@ jobs:
       with:
         node-version: '15.x'
     - run: npm ci
-    - run: npm test 2>&1 | tee unitlogs/test.log
+    - run: npm test 2>&1 | tee unitlogs/$(date +%s).log
     - name: Update test results
       run: |
         git config --global user.name 'Ghost'
         git config --global user.email 'michal.miladowski@gmail.com'
-        git add unitlogs/test.log
-        git commit -am 'Updated test results'
+        git add .
+        git commit -m 'Updated test results'
         git push
