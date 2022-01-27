@@ -8,5 +8,13 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: UnitLogs cleanup
         run: sh .github/workflows-scripts/clean-unitlogs.sh
+      - name: Commiting
+        run: |
+          git config --global user.name 'Ghost'
+          git config --global user.email 'michal.miladowski@gmail.com'
+          git add .
+          git commit -m 'UnitLogs cleanup'
+          git push
