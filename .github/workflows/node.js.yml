@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: '15.x'
     - run: npm ci
-    - run: npm test 2>&1 | tee unitlog.txt
+    - run: npm test 2>&1 | tee unitlogs/$(date +%s).log
     - name: Update test results
       run: |
         git config --global user.name 'Ghost'
