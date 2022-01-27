@@ -16,5 +16,5 @@ jobs:
           git config --global user.name 'Ghost'
           git config --global user.email 'michal.miladowski@gmail.com'
           git add .
-          git commit -m 'UnitLogs cleanup'
+          git commit -m 'UnitLogs cleanup' || true
           git push
