@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: UnitLogs cleanup
-        run: sh .github/workflows-scripts/clean-unitlogs.sh
+        run: bash .github/workflows-scripts/clean-unitlogs.sh
       - name: Commiting
         run: |
           git config --global user.name 'Ghost'
