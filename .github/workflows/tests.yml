@@ -15,8 +15,10 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '15.x'
-    - run: npm ci
-    - run: npm test 2>&1 | tee result.txt
+    - name: Install project dependencies
+      run: npm ci
+    - name: Run tests
+      run: npm test 2>&1 | tee result.txt
     - name: Archive test results
       uses: actions/upload-artifact@v2
       with:
