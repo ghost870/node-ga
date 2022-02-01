@@ -16,11 +16,10 @@ jobs:
       with:
         node-version: '15.x'
     - run: npm ci
-    - run: npm test 2>&1 | tee unitlogs/$(date +%s).log
-    - name: Save test results
-      run: |
-        git config --global user.name 'Ghost'
-        git config --global user.email 'michal.miladowski@gmail.com'
-        git add .
-        git commit -m 'Saved test results'
-        git push
+    - run: npm test 2>&1 | tee result.txt
+    - name: Archive test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: result.txt
+        retention-days: 1
