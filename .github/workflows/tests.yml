@@ -28,7 +28,7 @@ jobs:
       uses: actions-ecosystem/action-create-issue@v1
       with:
         github_token: ${{ secrets.github_token }}
-        title: ${{ steps.tests.outputs.date }}
+        title: costam
         body: |
           costam
     - name: Archive test results
