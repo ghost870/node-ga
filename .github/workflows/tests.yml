@@ -18,19 +18,9 @@ jobs:
     - name: Install project dependencies
       run: npm ci
     - name: Run tests
-      id: tests
       run: |
         set -o pipefail
         npm test 2>&1 | tee result.txt
-        echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
-    - name: Create issue if unit tests failed
-      if: failure()
-      uses: actions-ecosystem/action-create-issue@v1
-      with:
-        github_token: ${{ secrets.github_token }}
-        title: costam
-        body: |
-          costam
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
@@ -38,3 +28,15 @@ jobs:
         name: test-results
         path: result.txt
         retention-days: 1
+    - name: Gathering information for issue if unit tests failed
+      id: issueinfo
+      run: |
+        echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
+    - name: Create issue if unit tests failed
+      if: failure()
+      uses: actions-ecosystem/action-create-issue@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        title: ${{ steps.issueinfo.outputs.date }}
+        body: |
+          costam
