@@ -19,6 +19,9 @@ jobs:
       run: npm ci
     - name: Run tests
       run: set -o pipefail && npm test 2>&1 | tee result.txt
+    - name: Create issue if unit tests failed
+      if: failure()
+      uses: JasonEtco/create-an-issue@v2
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
