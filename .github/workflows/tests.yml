@@ -33,7 +33,11 @@ jobs:
       if: failure()
       run: |
         echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
-        echo "::set-output name=file::$(cat /etc/passwd)"
+        RESULT=$(cat result.txt)
+        RESULT="${RESULT//'%'/'%25'}"
+        RESULT="${RESULT//$'\n'/'%0A'}"
+        RESULT="${RESULT//$'\r'/'%0D'}"
+        echo "::set-output name=file::$RESULT"
     - name: Create issue if failure
       if: failure()
       uses: actions-ecosystem/action-create-issue@v1
