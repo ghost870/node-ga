@@ -18,7 +18,10 @@ jobs:
     - name: Install project dependencies
       run: npm ci
     - name: Run tests
-      run: set -o pipefail && npm test 2>&1 | tee result.txt
+      run: |
+        set -o pipefail
+        npm test 2>&1 | tee result.txt
+        echo ::set-env name=RESULT::$(cat result.txt)
     - name: Create issue if unit tests failed
       if: failure()
       uses: JasonEtco/create-an-issue@v2
