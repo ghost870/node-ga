@@ -33,6 +33,7 @@ jobs:
       if: failure()
       run: |
         echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
+        echo "::set-output name=file::$(cat result.txt)"
     - name: Create issue if failure
       if: failure()
       uses: actions-ecosystem/action-create-issue@v1
@@ -40,4 +41,4 @@ jobs:
         github_token: ${{ secrets.github_token }}
         title: Unit tests failed (${{ github.actor }}, ${{ steps.issueinfo.outputs.date }})
         body: |
-          costam
+          ${{ steps.issueinfo.outputs.file }}
