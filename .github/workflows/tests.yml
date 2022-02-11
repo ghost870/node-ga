@@ -28,16 +28,16 @@ jobs:
         name: test-results
         path: result.txt
         retention-days: 1
-    - name: Gathering information for issue if unit tests failed
+    - name: Gather information for issue if failure
       id: issueinfo
       if: failure()
       run: |
         echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
-    - name: Create issue if unit tests failed
+    - name: Create issue if failure
       if: failure()
       uses: actions-ecosystem/action-create-issue@v1
       with:
         github_token: ${{ secrets.github_token }}
-        title: ${{ steps.issueinfo.outputs.date }}
+        title: Unit tests failed (${{ github.actor }}, ${{ steps.issueinfo.outputs.date }})
         body: |
           costam
