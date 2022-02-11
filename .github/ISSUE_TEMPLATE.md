@@ -1,5 +1,5 @@
 ---
-title: Unit tests failed {{ date | date('YYYY-MM-DD HH:mm:SS') }}
+title: Unit tests failed {{ github.actor }} {{ date | date('YYYY-MM-DD HH:mm:SS') }}
 ---
 :(
 
