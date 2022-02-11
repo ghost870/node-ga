@@ -18,15 +18,19 @@ jobs:
     - name: Install project dependencies
       run: npm ci
     - name: Run tests
+      id: tests
       run: |
         set -o pipefail
         npm test 2>&1 | tee result.txt
-        echo ::set-env name=RESULT::$(echo ok)
+        echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
     - name: Create issue if unit tests failed
       if: failure()
-      uses: JasonEtco/create-an-issue@v2
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions-ecosystem/action-create-issue@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        title: ${{ steps.tests.outputs.date }}
+        body: |
+          costam
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
