@@ -43,6 +43,6 @@ jobs:
       uses: actions-ecosystem/action-create-issue@v1
       with:
         github_token: ${{ secrets.github_token }}
-        title: Unit tests failed (${{ github.actor }}, ${{ steps.issueinfo.outputs.date }})
+        title: Unit tests failed (${{ github.actor }}, ${{ steps.issueinfo.outputs.date }}, ${{ github.run_id }})
         body: |
           ${{ steps.issueinfo.outputs.file }}
