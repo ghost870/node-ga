@@ -33,7 +33,7 @@ jobs:
       if: failure()
       run: |
         echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
-        echo "::set-output name=file::$(cat result.txt)"
+        echo "::set-output name=file::$(echo ok)"
     - name: Create issue if failure
       if: failure()
       uses: actions-ecosystem/action-create-issue@v1
