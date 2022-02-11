@@ -30,6 +30,7 @@ jobs:
         retention-days: 1
     - name: Gathering information for issue if unit tests failed
       id: issueinfo
+      if: failure()
       run: |
         echo "::set-output name=date::$(date "+%Y-%m-%d %H:%M:%S")"
     - name: Create issue if unit tests failed
