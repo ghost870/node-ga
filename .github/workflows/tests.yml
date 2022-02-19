@@ -23,6 +23,10 @@ jobs:
         npm test 2>&1 | tee result.txt
     - name: Build docker image
       run: docker build -t nodeapp:${{ github.run_id }} .
+    - name: Log into docker repository
+      run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Push docker image
+      run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_REPOSITORY }}:${{ github.run_id }}
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
