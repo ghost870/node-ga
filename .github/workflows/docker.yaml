@@ -1,0 +1,23 @@
+name: Build docker
+
+on:
+  workflow_run:
+    workflows: ["Run tests"]
+    types:
+      - completed
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    environment: development
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build -t ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_REPOSITORY }}:${{ github.run_id }} .
+    - name: Log into docker repository
+      run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Push docker image
+      run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_REPOSITORY }}:${{ github.run_id }}
