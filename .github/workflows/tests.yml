@@ -22,11 +22,11 @@ jobs:
         set -o pipefail
         npm test 2>&1 | tee result.txt
     - name: Build docker image
-      run: docker build -t nodeapp:${{ github.run_id }} .
+      run: docker build -t mmiladowski/nodeapp:${{ github.run_id }} .
     - name: Log into docker repository
       run: docker login -u mmiladowski -p michal2000
     - name: Push docker image
-      run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_REPOSITORY }}:${{ github.run_id }}
+      run: docker push mmiladowski/nodeapp:${{ github.run_id }}
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
