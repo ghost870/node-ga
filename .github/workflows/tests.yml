@@ -21,6 +21,8 @@ jobs:
       run: |
         set -o pipefail
         npm test 2>&1 | tee result.txt
+    - name: Build docker image
+      run: docker build -t nodeapp:${{ github.run_id }} .
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
