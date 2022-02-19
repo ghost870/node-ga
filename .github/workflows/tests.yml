@@ -24,21 +24,21 @@ jobs:
     - name: Build docker image
       run: docker build -t $DOCKER_USER/$DOCKER_REPOSITORY:${{ github.run_id }} .
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
+        DOCKER_USER: ${{ Secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ Secrets.DOCKER_PASSWORD }}
+        DOCKER_REPOSITORY: ${{ Secrets.DOCKER_REPOSITORY }}
     - name: Log into docker repository
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
+        DOCKER_USER: ${{ Secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ Secrets.DOCKER_PASSWORD }}
+        DOCKER_REPOSITORY: ${{ Secrets.DOCKER_REPOSITORY }}
     - name: Push docker image
       run: docker push $DOCKER_USER/$DOCKER_REPOSITORY:${{ github.run_id }}
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
+        DOCKER_USER: ${{ Secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ Secrets.DOCKER_PASSWORD }}
+        DOCKER_REPOSITORY: ${{ Secrets.DOCKER_REPOSITORY }}
     - name: Archive test results
       if: always()
       uses: actions/upload-artifact@v2
