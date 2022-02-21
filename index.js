@@ -6,4 +6,4 @@ const server = http.createServer((req, res) => {
     res.end('OK...')
 })
 
-server.listen(3000, () => {})
+server.listen(process.env.PORT || 3000, () => {})
