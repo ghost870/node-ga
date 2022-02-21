@@ -26,4 +26,4 @@ jobs:
         heroku_app_name: node-ga-${{ github.run_id }}
         usedocker: true
     - name: Destroy app
-      run: heroku apps:destroy --app node-ga-${{ github.run_id }}
+      run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
