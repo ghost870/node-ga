@@ -6,6 +6,9 @@ on:
     types:
       - completed
 
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_APIKEY }}
+
 jobs:
   deploy:
 
@@ -16,10 +19,11 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - uses: actions/checkout@v2
-    - run: heroku
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_email: michal.miladowski@gmail.com
         heroku_api_key: ${{ secrets.HEROKU_APIKEY }}
         heroku_app_name: node-ga-${{ github.run_id }}
         usedocker: true
+    - name: Destroy app
+      run: heroku apps:destroy --app node-ga-${{ github.run_id }}
