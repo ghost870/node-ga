@@ -16,6 +16,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - uses: actions/checkout@v2
+    - run: heroku
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_email: michal.miladowski@gmail.com
