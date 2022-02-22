@@ -29,7 +29,7 @@ jobs:
       run: |
         for i in {1..60}
         do
-          if curl -s https://node-gaa-${{ github.run_id }}.herokuapp.com | grep -q OK...
+          if curl -s https://node-ga-${{ github.run_id }}.herokuapp.com | grep -q OK...
           then
             exit 0
           fi
