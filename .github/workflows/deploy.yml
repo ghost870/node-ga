@@ -27,6 +27,6 @@ jobs:
         usedocker: true
     - name: Test connection
       run: curl -s https://node-ga-${{ github.run_id }}.herokuapp.com
-    - name: Destroy app
-      if: always()
-      run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
+#     - name: Destroy app
+#       if: always()
+#       run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
