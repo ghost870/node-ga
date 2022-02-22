@@ -25,5 +25,8 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_APIKEY }}
         heroku_app_name: node-ga-${{ github.run_id }}
         usedocker: true
+    - name: Test connection
+      run: curl https://node-ga-${{ github.run_id }}.herokuapp.com | grep -q OK...
     - name: Destroy app
+      if: always()
       run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
