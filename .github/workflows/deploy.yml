@@ -26,7 +26,18 @@ jobs:
         heroku_app_name: node-ga-${{ github.run_id }}
         usedocker: true
     - name: Test connection
-      run: sleep 10 && curl -s https://node-ga-${{ github.run_id }}.herokuapp.com | grep -q OK...
-#     - name: Destroy app
-#       if: always()
-#       run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
+      run: |
+        for i in {1..60}
+        do
+          if curl -s https://node-ga-${{ github.run_id }}.herokuapp.com | grep -q OK...
+          then
+            exit 0
+          fi
+          
+          sleep 1
+        done
+        
+        exit 1
+    - name: Destroy app
+      if: always()
+      run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
