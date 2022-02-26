@@ -23,7 +23,7 @@ jobs:
       with:
         heroku_email: michal.miladowski@gmail.com
         heroku_api_key: ${{ secrets.HEROKU_APIKEY }}
-        heroku_app_name: node-ga-${{ github.run_id }}
+        heroku_app_name: node
         usedocker: true
     - name: Test connection
       run: |
