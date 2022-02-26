@@ -25,10 +25,10 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_APIKEY }}
         heroku_app_name: node-ga-${{ github.run_id }}
         usedocker: true
+    - name: Wait for app
+      run: heroku ps:wait --app node-ga-${{ github.run_id }}
     - name: Test connection
       run: |
-        for i in {1..60}
-        do
           result=$(curl -s https://node-ga-${{ github.run_id }}.herokuapp.com)
         
           if echo "$result" | grep -q 'Application Error'
@@ -41,10 +41,7 @@ jobs:
             exit 0
           fi
           
-          sleep 1
-        done
-        
-        exit 1
+          exit 2
     - name: Destroy app
       if: always()
       run: heroku apps:destroy --app node-ga-${{ github.run_id }} --confirm=node-ga-${{ github.run_id }}
